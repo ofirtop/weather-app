@@ -34,7 +34,6 @@ class Home extends Component {
         }
     }
     componentDidUpdate(prevProps, prevState) {
-        console.log('inside componentDidUpdate')
         //check if the previouse cityInfo isCurrent
         let cityInfoPrev = prevProps.citiesInfo.filter(cityInfo => {
             if (cityInfo === undefined) return false

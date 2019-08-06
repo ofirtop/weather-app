@@ -201,7 +201,7 @@ var fakeCurrentForcastFalse = [
 const getForcast = (cityId = '215854') => {
     //BEFORE PRODUCTION - OPEN THIS LINES
     const WEATHER_API_KEY = 'gQ307OUWQ0rbqOqwiGr85Z3JDQBtEEII';
-    const FORCAST_URL = 'http://dataservice.accuweather.com/forecasts/v1/daily/5day/';
+    const FORCAST_URL = 'https://dataservice.accuweather.com/forecasts/v1/daily/5day/';
     const query = `${FORCAST_URL}${cityId}?apikey=${WEATHER_API_KEY} `;    
 
     return Axios.get(query)
@@ -218,7 +218,7 @@ const getForcast = (cityId = '215854') => {
 const getWeather = (cityId = '215854') => {
     //BEFORE PRODUCTION - OPEN THIS LINES
     const WEATHER_API_KEY = 'gQ307OUWQ0rbqOqwiGr85Z3JDQBtEEII';
-    const WEATHER_URL = 'http://dataservice.accuweather.com/currentconditions/v1/';
+    const WEATHER_URL = 'https://dataservice.accuweather.com/currentconditions/v1/';
     const query = `${WEATHER_URL}${cityId}?apikey=${WEATHER_API_KEY} `;
 
     return Axios.get(query)

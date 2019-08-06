@@ -5,7 +5,7 @@ import Axios from "axios";
 const getCityInfoByName = (cityName) => {
   //BEFORE PRODUCTION - OPEN THIS LINES
   const WEATHER_API_KEY = 'gQ307OUWQ0rbqOqwiGr85Z3JDQBtEEII'
-  const LOCATION_AUTO_COMPLETE_BASE = 'http://dataservice.accuweather.com/locations/v1/cities/autocomplete'
+  const LOCATION_AUTO_COMPLETE_BASE = 'https://dataservice.accuweather.com/locations/v1/cities/autocomplete'
   const query = `${LOCATION_AUTO_COMPLETE_BASE}?apikey=${WEATHER_API_KEY}&q=${cityName} `
 
   return Axios.get(query)
