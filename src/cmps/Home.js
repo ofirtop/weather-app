@@ -5,7 +5,7 @@ import SingleDaySummary from './SingleDaySummary'
 import { getForcast, getWeather } from '../store/actions/weatherActions'
 import { getCityInfo, toggleFavoriteStatus, loadFavoritesFromStorage } from '../store/actions/locationActions'
 import utilService from '../services/utilService'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 class Home extends Component {
@@ -32,9 +32,9 @@ class Home extends Component {
                 this.props.getCityInfo(this.props.defaultCityName, false, true)
             }
         }
-
     }
     componentDidUpdate(prevProps, prevState) {
+        console.log('inside componentDidUpdate')
         //check if the previouse cityInfo isCurrent
         let cityInfoPrev = prevProps.citiesInfo.filter(cityInfo => {
             if (cityInfo === undefined) return false
@@ -59,6 +59,17 @@ class Home extends Component {
                 this.props.getWeather(cityInfoCurrent[0].cityId, true);
             }
         }
+
+        //handle location errors
+        if ((prevProps.locationError !== this.props.locationError) &&
+        this.props.locationError !== '') {
+            toast(this.props.locationError)
+        }
+        //handle weather errors
+        if ((prevProps.weatherError !== this.props.weatherError) &&
+            this.props.weatherError !== '') {
+                toast(this.props.weatherError)
+        }
     }
     handleToggleFavorite = () => {
         let city = this._getCurrentCity(this.props.citiesInfo);
@@ -79,10 +90,12 @@ class Home extends Component {
             else return false;
         }
     }
-    notify = () => toast("baba gnush")
+
     render() {
         //call notify
-        if (this.props.location.error) toast("baba gnush")
+
+        // console.log('render error: ',this.props.locationError)
+        // if(this.props.locationError) this.notify(this.props.locationError)
 
         //extracting WEATHER from props
         let currentWeather = this.props.currentWeather.filter(weather => weather.isCurrent)
@@ -103,8 +116,6 @@ class Home extends Component {
             if (city === undefined) return false
             return city.isCurrent
         });
-        let isFavorite;
-        if (cityInfo) isFavorite = cityInfo.isFavorite;
 
         let countryName, cityName;
         if (cityInfo) {
@@ -115,10 +126,6 @@ class Home extends Component {
         //extracting forcast from props
         const { forcast } = this.props;
         const { forcastDescription } = this.props;
-
-        //extracting ERRORS from props
-        const { forcastError } = this.props;
-        const { currentWeatherError } = this.props;
 
         //Creating forcast
         const dayList = forcast ? (
@@ -136,7 +143,6 @@ class Home extends Component {
         return (
             <div className="container" >
                 <Filter />
-                <button className="btn" onClick={this.notify}>give me some toast</button>
                 <div className="flex-space-between">
                     <div className="flex  ">
                         <img className="large-image" src={CURRENT_WEATHER_URL}

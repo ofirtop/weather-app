@@ -11,7 +11,8 @@ const weatherReducer = (state = initState, action) => {
             return {
                 ...state,
                 forcast: action.forcast.DailyForecasts,
-                forcastDescription: action.forcast.Headline.Text
+                forcastDescription: action.forcast.Headline.Text,
+                error:''
             }
         case 'SET_WEATHER':
             {
@@ -27,12 +28,14 @@ const weatherReducer = (state = initState, action) => {
                 if (isExists) {
                     return {
                         ...state,
-                        currentWeather: [...updatedWeather]
+                        currentWeather: [...updatedWeather],
+                        error:''
                     }
                 } else {
                     return {
                         ...state,
-                        currentWeather: [...state.currentWeather, action.weather]
+                        currentWeather: [...state.currentWeather, action.weather],
+                        error:''
                     }
                 }
             }

@@ -37,7 +37,7 @@ class Favorites extends Component {
   }
   render() {
     return (
-      <div className="container border-black">
+      <div className="container">
         <FavoriteList />
       </div>
     )

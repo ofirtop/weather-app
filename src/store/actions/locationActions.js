@@ -1,5 +1,5 @@
 import LocationService from '../../services/LocationService'
-import { saveToStorage, loadFromStorage } from '../../services/utilService'
+import { loadFromStorage } from '../../services/utilService'
 
 export const getCityInfo = (cityName, isFavorite, isCurrent) => {
     return (dispatch, getState) => {

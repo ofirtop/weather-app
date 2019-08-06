@@ -25,10 +25,10 @@ class FavoriteList extends Component {
                     <SingleFavoriteItem composedInfo={composedInfo} key={index} />
                 )
             })
-        ) : (<div className="border-blue" >No Favorites Selected </div>)
+        ) : (<div className="" >No Favorites Selected </div>)
        
         return (
-            <ul className="forcast-list border-yellow">          
+            <ul className="forcast-list center">          
                     {favoritesInfoToRender}
             </ul>
         )

@@ -1,4 +1,4 @@
-import { saveToStorage, loadFromStorage } from '../../services/utilService'
+import { saveToStorage } from '../../services/utilService'
 
 const initState = {
     favorites: [],//City names
@@ -15,7 +15,8 @@ const locationReducer = (state = initState, action) => {
                 return {
                     ...state,
                     isFavoritesLoaded: true,
-                    favorites: action.favorites
+                    favorites: action.favorites,
+                    error: ''
                 }
             }
         case 'SET_CITY_INFO':
@@ -31,13 +32,15 @@ const locationReducer = (state = initState, action) => {
                 if (!selectedCity) {
                     return {
                         ...state,
-                        citiesInfo: [...cities, action.cityInfo]
+                        citiesInfo: [...cities, action.cityInfo],
+                        error: ''
                     }
                 } else {
                     selectedCity.isCurrent = action.cityInfo.isCurrent;
                     return {
                         ...state,
-                        citiesInfo: [...cities]
+                        citiesInfo: [...cities],
+                        error: ''
                     }
                 }
             }
@@ -61,20 +64,11 @@ const locationReducer = (state = initState, action) => {
                     if (cityIndex >= 0) favoriteNames.splice(cityIndex, 1);
                 }
                 saveToStorage('favorites', favoriteNames)
-                if (action.cityId === '215855') {//Madrid
-                    console.log('inside store about to insert error')
-                    return {
-                        ...state,
-                        error:'THIS IS A MADRID ERROR',
-                        favorites: favoriteNames,
-                        citiesInfo: [...cities]
-                    }
-                } else {
-                    return {
-                        ...state,
-                        favorites: favoriteNames,
-                        citiesInfo: [...cities]
-                    }
+                return {
+                    ...state,
+                    favorites: favoriteNames,
+                    citiesInfo: [...cities],
+                    error: ''
                 }
             }
         case 'LOCATION_ERROR':
