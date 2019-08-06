@@ -1,8 +1,6 @@
 import Axios from "axios";
 
-export default {
-  getCityInfoByName
-}
+
 
 const getCityInfoByName = (cityName) => {
   //BEFORE PRODUCTION - OPEN THIS LINES
@@ -188,3 +186,6 @@ const getCityInfoByName = (cityName) => {
 }
 
 
+export default {
+  getCityInfoByName
+}
