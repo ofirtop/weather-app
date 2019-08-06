@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import './assets/libs/animate.css';
+
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { createStore,applyMiddleware,compose } from 'redux'
@@ -10,6 +12,7 @@ import rootReducer from  './store/reducers/rootReducer'
 //instead of returning an action, we will return a function, thus hulting the dispach operation
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension';
+
 
 // const store = createStore(rootReducer,applyMiddleware(thunk),composeWithDevTools());
 const store = createStore(rootReducer,

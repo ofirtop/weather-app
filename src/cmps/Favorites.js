@@ -7,43 +7,37 @@ import { getWeather } from '../store/actions/weatherActions'
 // const Favorites = (props) =>{
 class Favorites extends Component {
   componentDidMount() {
-    console.log('componentDidMount', this.props)
     //sending request for cityInfo 
-    if(this.props.favorites) this.props.favorites.forEach((favoriteCityName) => {
+    if (this.props.favorites) this.props.favorites.forEach((favoriteCityName) => {
       //check if iterated city isCurrent
-      console.log('favoriteCityName', favoriteCityName)
       let cityInfo = this.props.citiesInfo.find(cityInfo => cityInfo.cityName === favoriteCityName);
       if (!cityInfo) {
-        console.log('send request for cityInfo. city is in favorite list but not in the cityInfo array')
         this.props.getCityInfo(favoriteCityName, true, false)
       }
       else {//city in cityInfo Array, not marked as favorite, but is in the favorites
         toggleFavoriteStatus(favoriteCityName)
-        console.log('ABOUT TO SET TOGGLE')
         this.props.getWeather(cityInfo.cityId, cityInfo.isCurrent)
       }
     })
   }
   //sending request for forcast if cityInfo is a favorite
   componentDidUpdate(prevProps, prevState) {
-    // console.log('componentDidUpdate', this.props)
-
     this.props.citiesInfo.forEach((cityInfo) => {
       //if cityInfo exists and it is favorite
-      let city = this.props.favorites.find(cityName => cityInfo.CityName === cityName)
+      let city = this.props.favorites.find(cityName => cityInfo.cityName === cityName)
       if (city) {
         //if city dont have weather, request one
-        let selectedWeather = this.props.currentWeather.find(weather => weather.cityId === cityInfo.cityId)
-        if (!selectedWeather) this.props.getWeather(cityInfo.cityId, cityInfo.isCurrent)
+        if (!this.props.weather) this.props.getWeather(cityInfo.cityId, cityInfo.isCurrent)
+        else {
+          let selectedWeather = this.props.weather.currentWeather.find(weather => weather.cityId === cityInfo.cityId)
+          if (!selectedWeather) this.props.getWeather(cityInfo.cityId, cityInfo.isCurrent)
+        }
       }
     })
   }
   render() {
-    //console.log('FAVORITES: ',this.props)
-
     return (
-      <div className="container">
-        <h4 className="center">Favorites</h4>
+      <div className="container border-black">
         <FavoriteList />
       </div>
     )

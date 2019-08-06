@@ -116,11 +116,9 @@ const getCityInfoByName = (cityName) => {
   //         cityName : result.data[0].LocalizedName
   //     };
 
-  //     console.log(`getCityInfoByName: cityName: ${cityName}, result: ${cityInfo}` )
   //     return cityInfo
   // })
   // .catch(error =>{
-  //     console.log('getCityInfoByName Error : ',error)
   // })
 
   //BEFORE PRODUCTION - DELETE THIS LINE

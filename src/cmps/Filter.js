@@ -7,7 +7,6 @@ class Filter extends Component {
         cityName: ''
     }
     handleChange = (e) => {
-        // this.state.context = e.target.value
         this.setState({
             cityName:e.target.value
         })
@@ -15,7 +14,6 @@ class Filter extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.getCityInfo(this.state.cityName,false,true);
-        console.log(`just submited to getCityInfo. cityName:${this.state.cityName}`)
     }
     render() {
         return (

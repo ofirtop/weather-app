@@ -206,11 +206,10 @@ const getForcast = (cityId = '215854') => {
 
     // return Axios.get(query)
     //     .then(result => {
-    //         console.log(`getForcast: cityId: ${cityId}, result: ${result.data}` )
+
     //         return result.data
     //     })
     //     .catch(error => {
-    //         console.log('getForcast: Error : ',error)
     //     })
 
     //BEFORE PRODUCTION - DELETE THIS LINE
@@ -223,8 +222,7 @@ const getWeather = (cityId = '215854'/*,isFavorite*/) => {
     // const query = `${WEATHER_URL}${cityId}?apikey=${WEATHER_API_KEY} `;
 
     // return Axios.get(query)
-    //     .then(result => {
-    //         // console.log(result.data)
+    //     .then(result => {    
     //         let weather = {
     //             isDayTime: result.data[0].IsDayTime,
     //             weatherIcon: result.data[0].WeatherIcon,
@@ -234,11 +232,9 @@ const getWeather = (cityId = '215854'/*,isFavorite*/) => {
     //             temperatureMetricVal: result.data[0].Temperature.Metric.Value,
     //             temperatureMetricUnit: result.data[0].Temperature.Metric.Unit,
     //         }
-    //         console.log(`getWeather: cityId: ${cityId}, result: ${weather}` )
     //         return weather
     //     })
     //     .catch(error => {
-    //         console.log('getWeather Error: ', error)
     //     })
 
     //BEFORE PRODUCTION - DELETE THIS LINE

@@ -4,7 +4,7 @@ const Navbar = () =>{
     return (
         <nav className="blue darken-2">
             <div>
-                <Link to="/" className="left brand">Topaz's Weather</Link>
+                <Link to="/" className="left brand">iWeather</Link>
                 <ul className="right nav-links">
                    <li><NavLink to="/">Home</NavLink></li> 
                    <li><NavLink to="/favorites">Favorites</NavLink></li> 
