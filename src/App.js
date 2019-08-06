@@ -9,7 +9,7 @@ import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
     <ToastContainer />
       <div className="App">
         <Navbar />

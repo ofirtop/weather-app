@@ -1,4 +1,4 @@
-// import Axios from "axios";
+import Axios from "axios";
 // import './fiveDaysWeather.json'
 
 var fake5DaysForcast = {
@@ -200,56 +200,55 @@ var fakeCurrentForcastFalse = [
 
 const getForcast = (cityId = '215854') => {
     //BEFORE PRODUCTION - OPEN THIS LINES
-    // const WEATHER_API_KEY = 'gQ307OUWQ0rbqOqwiGr85Z3JDQBtEEII';
-    // const FORCAST_URL = 'http://dataservice.accuweather.com/forecasts/v1/daily/5day/';
-    // const query = `${FORCAST_URL}${cityId}?apikey=${WEATHER_API_KEY} `;    
+    const WEATHER_API_KEY = 'gQ307OUWQ0rbqOqwiGr85Z3JDQBtEEII';
+    const FORCAST_URL = 'http://dataservice.accuweather.com/forecasts/v1/daily/5day/';
+    const query = `${FORCAST_URL}${cityId}?apikey=${WEATHER_API_KEY} `;    
 
-    // return Axios.get(query)
-    //     .then(result => {
+    return Axios.get(query)
+        .then(result => {
 
-    //         return result.data
-    //     })
-    //     .catch(error => {
-    //     })
+            return result.data
+        })
+        .catch(error => {
+        })
 
     //BEFORE PRODUCTION - DELETE THIS LINE
-    return Promise.resolve(fake5DaysForcast)
+    // return Promise.resolve(fake5DaysForcast)
 }
-const getWeather = (cityId = '215854'/*,isFavorite*/) => {
+const getWeather = (cityId = '215854') => {
     //BEFORE PRODUCTION - OPEN THIS LINES
-    // const WEATHER_API_KEY = 'gQ307OUWQ0rbqOqwiGr85Z3JDQBtEEII';
-    // const WEATHER_URL = 'http://dataservice.accuweather.com/currentconditions/v1/';
-    // const query = `${WEATHER_URL}${cityId}?apikey=${WEATHER_API_KEY} `;
+    const WEATHER_API_KEY = 'gQ307OUWQ0rbqOqwiGr85Z3JDQBtEEII';
+    const WEATHER_URL = 'http://dataservice.accuweather.com/currentconditions/v1/';
+    const query = `${WEATHER_URL}${cityId}?apikey=${WEATHER_API_KEY} `;
 
-    // return Axios.get(query)
-    //     .then(result => {    
-    //         let weather = {
-    //             isDayTime: result.data[0].IsDayTime,
-    //             weatherIcon: result.data[0].WeatherIcon,
-    //             weatherDescription: result.data[0].WeatherText,
-    //             temperatureImperialVal: result.data[0].Temperature.Imperial.Value,
-    //             temperatureImperialUnit: result.data[0].Temperature.Imperial.Unit,
-    //             temperatureMetricVal: result.data[0].Temperature.Metric.Value,
-    //             temperatureMetricUnit: result.data[0].Temperature.Metric.Unit,
-    //         }
-    //         return weather
-    //     })
-    //     .catch(error => {
-    //     })
+    return Axios.get(query)
+        .then(result => {    
+            let weather = {
+                isDayTime: result.data[0].IsDayTime,
+                weatherIcon: result.data[0].WeatherIcon,
+                weatherDescription: result.data[0].WeatherText,
+                temperatureImperialVal: result.data[0].Temperature.Imperial.Value,
+                temperatureImperialUnit: result.data[0].Temperature.Imperial.Unit,
+                temperatureMetricVal: result.data[0].Temperature.Metric.Value,
+                temperatureMetricUnit: result.data[0].Temperature.Metric.Unit,
+            }
+            return weather
+        })
+        .catch(error => error )
 
     //BEFORE PRODUCTION - DELETE THIS LINE
 
-    let weather = {
-        isDayTime: fakeCurrentForcastFalse[0].IsDayTime,
-        weatherIcon: fakeCurrentForcastFalse[0].WeatherIcon,
-        weatherDescription: fakeCurrentForcastFalse[0].WeatherText,
-        temperatureImperialVal: fakeCurrentForcastFalse[0].Temperature.Imperial.Value,
-        temperatureImperialUnit: fakeCurrentForcastFalse[0].Temperature.Imperial.Unit,
-        temperatureMetricVal: fakeCurrentForcastFalse[0].Temperature.Metric.Value,
-        temperatureMetricUnit: fakeCurrentForcastFalse[0].Temperature.Metric.Unit,
-    }
+    // let weather = {
+    //     isDayTime: fakeCurrentForcastFalse[0].IsDayTime,
+    //     weatherIcon: fakeCurrentForcastFalse[0].WeatherIcon,
+    //     weatherDescription: fakeCurrentForcastFalse[0].WeatherText,
+    //     temperatureImperialVal: fakeCurrentForcastFalse[0].Temperature.Imperial.Value,
+    //     temperatureImperialUnit: fakeCurrentForcastFalse[0].Temperature.Imperial.Unit,
+    //     temperatureMetricVal: fakeCurrentForcastFalse[0].Temperature.Metric.Value,
+    //     temperatureMetricUnit: fakeCurrentForcastFalse[0].Temperature.Metric.Unit,
+    // }
 
-    return Promise.resolve(weather)
+    // return Promise.resolve(weather)
 }
 
 
