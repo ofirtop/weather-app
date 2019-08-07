@@ -74,7 +74,7 @@ const locationReducer = (state = initState, action) => {
         case 'LOCATION_ERROR':
             return {
                 ...state,
-                error: action.error
+                error: JSON.stringify(action.error)
             }
         default:
             return state;
