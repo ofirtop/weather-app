@@ -9,32 +9,39 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .flex {
   display: flex;
 }
 .centered {
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 .flex-space-between {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  width: 100%;
 }
 
-.toogle-fav {
+.toggle-fav {
   min-width: 212px;
   margin-left: 10px;
-  
 }
-
+input{
+  margin-left:50px;
+  margin-right:15%;
+}
 ul.forcast-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));  
-  /* grid-template-columns: 150px 150px 150px 150px 150px;  */
-  grid-gap: 10px;
+  display: grid; 
+  grid-template-columns: repeat(5, minmax(150px, 1fr));
+  grid-gap: 30px;
   position: relative;
-  justify-content: center;
 }
 
 .main-description {
@@ -49,6 +56,7 @@ ul.forcast-list {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  font-size: 24px;
 }
 
 .week-day {
@@ -69,24 +77,60 @@ ul.forcast-list {
 .large-image {
   min-width: 140px;
 }
-
-.border-green {
-  border: 2px solid green;
+.curr-city {
+  align-items: center
 }
-
-.border-blue {
-  border: 2px solid blue;
-}
-
-.border-black {
-  border: 2px solid black;
-}
-
-.border-yellow {
-  border: 2px solid yellow;
-}
-
 button {
-  margin-right: 35px;
-  margin-top: 5px;
+  margin: 10px 35px;
+}
+
+.btn-toast {
+  align-self: flex-start;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 940px) {
+  ul.forcast-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center
+  }
+  .card {
+    margin: 10px
+  }
+  .container {
+    width: 100%;
+  }
+  .main-description {
+    font-size: 20px;
+  }
+  .card-title,
+  .flex-col {
+    font-size: 16px;
+    justify-content: flex-start;
+  }
+  .filter-container {
+    width: 90%;
+  }
+  .btn-toast, 
+  .toggle-fav {
+    margin: 5px;
+    min-width: unset;
+    align-self: center;
+    justify-self: center
+  }
+  .curr-city {
+    margin: 15px 5px;
+    justify-content: center;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .flex-space-between {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .toggle-fav {
+    margin-right: 15px;
+    min-width: unset;
+  }
 }

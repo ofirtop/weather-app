@@ -136,7 +136,7 @@ class Home extends Component {
         ) : (<h4>There is currently no forcast show</h4>)
 
 
-        const toggleAddFavorite = (this.isCurrentFavorite()) ? 'Remove from Favorites' : "Add to Favorites";
+        const toggleAddFavorite = (this.isCurrentFavorite()) ? 'Remove Favorite' : "Add to Favorites";
         const colorIsFavorite = (this.isCurrentFavorite()) ? { color: 'red' } : { color: 'grey' };
 
         return (
@@ -153,7 +153,7 @@ class Home extends Component {
                     </div>
                     <div className="flex centered">
                         <i className="small material-icons" style={colorIsFavorite}>favorite</i>
-                        <button className="btn toogle-fav blue darken-2" onClick={this.handleToggleFavorite}>{toggleAddFavorite}</button>
+                        <button className="btn toggle-fav blue darken-2" onClick={this.handleToggleFavorite}>{toggleAddFavorite}</button>
                     </div>
                 </div>
                 <div className="center main-description">{weatherDescription}</div>
