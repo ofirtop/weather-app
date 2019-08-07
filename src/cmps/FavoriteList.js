@@ -5,7 +5,6 @@ import SingleFavoriteItem from './SingleFavoriteItem'
 class FavoriteList extends Component {
     render() {
         const favoritesInfo = [];
-
         //composing an object that have cityInfo and weater (only if favorite)
         if (this.props.citiesInfo.length) {
             this.props.citiesInfo.forEach((cityInfo) => {
@@ -22,11 +21,11 @@ class FavoriteList extends Component {
         const favoritesInfoToRender = favoritesInfo.length ? (
             favoritesInfo.map((composedInfo, index) => {
                 return (
-                    <SingleFavoriteItem composedInfo={composedInfo} key={index} />
+                    <SingleFavoriteItem scale={this.props.scale} composedInfo={composedInfo} key={index} />
                 )
             })
         ) : (<div className="" >No Favorites Selected </div>)
-       
+        
         return (
             <ul className="forcast-list center">          
                     {favoritesInfoToRender}
@@ -38,7 +37,8 @@ class FavoriteList extends Component {
 const mapStateToProps = (state) => {
     return {
         citiesInfo: state.location.citiesInfo,
-        currentWeather: state.weather.currentWeather
+        currentWeather: state.weather.currentWeather,
+        scale:state.setting.currentScale
     }
 }
 

@@ -2,7 +2,7 @@ import WeatherService from '../../services/WeatherService'
 
 export const getForcast = (cityId) => {
     return (dispatch, getState) => {
-        WeatherService.getForcast(cityId)
+        WeatherService.getForcast(cityId,dispatch)
             .then(forcast => {
                 dispatch({ type: 'SET_FORCAST', forcast })
             })

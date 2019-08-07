@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
-import Filter from './Filter'
 import { connect } from 'react-redux'
-import SingleDaySummary from './SingleDaySummary'
 import { getForcast, getWeather } from '../store/actions/weatherActions'
 import { getCityInfo, toggleFavoriteStatus, loadFavoritesFromStorage } from '../store/actions/locationActions'
+import { toggleScale } from '../store/actions/settingActions'
 import utilService from '../services/utilService'
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+// import Toggle from 'react-toggle'
+// import 'react-toggle/style.css'
+import { toast } from 'react-toastify';
+import Filter from './Filter'
+import SingleDaySummary from './SingleDaySummary'
 
 class Home extends Component {
     componentDidMount() {
@@ -89,20 +92,28 @@ class Home extends Component {
             else return false;
         }
     }
-
+    isCurrentCelsius() {
+        return this.props.scale === 'c'
+    }
+    handleToggleScale = ()=>{
+        this.props.toggleScale()
+    }
     notify(msg) {
-        console.log('ARRIVED TOT NOTIFY: ', msg)
         toast(msg)
     }
     render() {
         //extracting WEATHER from props
         let currentWeather = this.props.currentWeather.filter(weather => weather.isCurrent)
         let weatherIcon, weatherDescription, temperatureImperialVal, temperatureImperialUnit;
-        //let temperatureMetricUnit, temperatureMetricVal, isDayTime
+        let temperatureMetricUnit, temperatureMetricVal; //, isDayTime
         if (currentWeather.length) {
             weatherDescription = currentWeather[0].weatherDescription;
+
             temperatureImperialVal = currentWeather[0].temperatureImperialVal;
             temperatureImperialUnit = currentWeather[0].temperatureImperialUnit;
+            
+            temperatureMetricVal = currentWeather[0].temperatureMetricVal;
+            temperatureMetricUnit = currentWeather[0].temperatureMetricUnit;
 
             weatherIcon = currentWeather[0].weatherIcon;
             if (weatherIcon < 10) weatherIcon = `0${weatherIcon}`
@@ -129,13 +140,16 @@ class Home extends Component {
         const dayList = forcast ? (
             forcast.map((day, index) => {
                 return (
-                    <SingleDaySummary day={day} key={index} />
+                    <SingleDaySummary scale={this.props.scale} day={day} key={index} />
                 )
             })
         ) : (<h4>There is currently no forcast show</h4>)
 
 
-        const toggleAddFavorite = (this.isCurrentFavorite()) ? 'Remove Favorite' : "Add to Favorites";
+        const isCelsius = (this.isCurrentCelsius()) ? 'hide' : '';
+        const isFahrenheit = (!this.isCurrentCelsius()) ? 'hide' : '';
+        const toggleScale = (this.isCurrentCelsius()) ? 'Set Fahrenheit' : 'Set Celsius';
+        const toggleAddFavorite = (this.isCurrentFavorite()) ? 'Remove Favorite' : 'Add to Favorites';
         const colorIsFavorite = (this.isCurrentFavorite()) ? { color: 'red' } : { color: 'grey' };
 
         return (
@@ -147,12 +161,15 @@ class Home extends Component {
                             title={weatherDescription} alt={weatherDescription} />
                         <div className="flex-col">
                             <div>{cityName}, {countryName}</div>
-                            <div>{temperatureImperialVal}{temperatureImperialUnit}</div>
+                            <div className={isCelsius}>{temperatureImperialVal}{temperatureImperialUnit}</div>
+                            <div className={isFahrenheit}>{temperatureMetricVal}{temperatureMetricUnit}</div>
                         </div>
                     </div>
                     <div className="flex centered add-fav">
                         <i className="small material-icons" style={colorIsFavorite}>favorite</i>
                         <button className="btn toggle-fav blue darken-2" onClick={this.handleToggleFavorite}>{toggleAddFavorite}</button>
+                        <button className="btn toggle-fav blue darken-2" onClick={this.handleToggleScale}>{toggleScale}</button>
+                        
                     </div>
                 </div>
                 <div className="center main-description">{weatherDescription}</div>
@@ -175,7 +192,8 @@ const mapStateToProps = (state) => {
         forcastDescription: state.weather.forcastDescription,
         currentWeather: state.weather.currentWeather,
         weatherError: state.weather.error,
-        locationError: state.location.error
+        locationError: state.location.error,
+        scale : state.setting.currentScale
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -184,6 +202,7 @@ const mapDispatchToProps = (dispatch) => {
         getForcast: (cityId) => { dispatch(getForcast(cityId)) },
         getWeather: (cityId, isCurrent) => { dispatch(getWeather(cityId, isCurrent)) },
         toggleFavoriteStatus: (cityId) => { dispatch(toggleFavoriteStatus(cityId)) },
+        toggleScale: () => { dispatch(toggleScale()) },
         loadFavoritesFromStorage: () => { dispatch(loadFavoritesFromStorage()) }
     }
 }
