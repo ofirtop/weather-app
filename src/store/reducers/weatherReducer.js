@@ -42,7 +42,7 @@ const weatherReducer = (state = initState, action) => {
         case 'WEATHER_ERROR':
             return {
                 ...state,
-                error: action.error
+                error: JSON.stringify(action.error)
             }
         default:
             return state;

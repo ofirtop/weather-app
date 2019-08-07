@@ -14,7 +14,7 @@ const getCityInfoByName = (cityName) => {
 
       return cityInfo
     })
-    .catch(error => console.log('RECEIVED ERROR IN LOCATION SERVICE:', error))
+    .catch(error => console.log(error))
 }
 
 

@@ -61,13 +61,13 @@ class Home extends Component {
 
         //handle location errors
         if ((prevProps.locationError !== this.props.locationError) &&
-        this.props.locationError !== '') {
-            toast(this.props.locationError)
+            this.props.locationError !== '') {
+            this.notify(this.props.locationError)
         }
         //handle weather errors
         if ((prevProps.weatherError !== this.props.weatherError) &&
             this.props.weatherError !== '') {
-                toast(this.props.weatherError)
+            this.notify(this.props.weatherError)
         }
     }
     handleToggleFavorite = () => {
@@ -90,12 +90,11 @@ class Home extends Component {
         }
     }
 
+    notify(msg) {
+        console.log('ARRIVED TOT NOTIFY: ', msg)
+        toast(msg)
+    }
     render() {
-        //call notify
-
-        // console.log('render error: ',this.props.locationError)
-        // if(this.props.locationError) this.notify(this.props.locationError)
-
         //extracting WEATHER from props
         let currentWeather = this.props.currentWeather.filter(weather => weather.isCurrent)
         let weatherIcon, weatherDescription, temperatureImperialVal, temperatureImperialUnit;
@@ -140,10 +139,10 @@ class Home extends Component {
         const colorIsFavorite = (this.isCurrentFavorite()) ? { color: 'red' } : { color: 'grey' };
 
         return (
-            <div className="container" >
+            <div className="main-container" >
                 <Filter />
                 <div className="flex-space-between">
-                    <div className="flex  ">
+                    <div className="flex curr-city">
                         <img className="large-image" src={CURRENT_WEATHER_URL}
                             title={weatherDescription} alt={weatherDescription} />
                         <div className="flex-col">
@@ -151,7 +150,7 @@ class Home extends Component {
                             <div>{temperatureImperialVal}{temperatureImperialUnit}</div>
                         </div>
                     </div>
-                    <div className="flex centered">
+                    <div className="flex centered add-fav">
                         <i className="small material-icons" style={colorIsFavorite}>favorite</i>
                         <button className="btn toggle-fav blue darken-2" onClick={this.handleToggleFavorite}>{toggleAddFavorite}</button>
                     </div>

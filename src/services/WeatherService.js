@@ -1,31 +1,23 @@
 import Axios from "axios";
 
-const getForcast = (cityId = '215854') => {
+const getForcast = (cityId = '215854',dispatch) => {
     const WEATHER_API_KEY = 'gQ307OUWQ0rbqOqwiGr85Z3JDQBtEEII';
-    const FORCAST_URL = 'https://dataservice.accuweather.com/forecasts/v1/daily/5day/';    
-    const query = `${FORCAST_URL}${cityId}?apikey=${WEATHER_API_KEY} `;    
+    const FORCAST_URL = 'https://dataservice.accuweather.com/forecasts/v1/daily/5day/';
+    const query = `${FORCAST_URL}${cityId}?apikey=${WEATHER_API_KEY} `;
 
-    let config = {
-        headers: {'Access-Control-Allow-Origin': '*'}
-    };
     return Axios.get(query)
         .then(result => {
-
             return result.data
         })
-        .catch(error =>  console.log('RECEIVED ERROR IN WEATHER SERVICE (getForcast):',error))
+        .catch(error =>  console.log(error))
 }
 const getWeather = (cityId = '215854') => {
     const WEATHER_API_KEY = 'gQ307OUWQ0rbqOqwiGr85Z3JDQBtEEII';
     const WEATHER_URL = 'https://dataservice.accuweather.com/currentconditions/v1/';
     const query = `${WEATHER_URL}${cityId}?apikey=${WEATHER_API_KEY} `;
 
-    let config = {
-        headers: {'Access-Control-Allow-Origin': '*'}
-    };
-
     return Axios.get(query)
-        .then(result => {    
+        .then(result => {
             let weather = {
                 isDayTime: result.data[0].IsDayTime,
                 weatherIcon: result.data[0].WeatherIcon,
@@ -37,9 +29,8 @@ const getWeather = (cityId = '215854') => {
             }
             return weather
         })
-        .catch(error => console.log('RECEIVED ERROR IN WEATHER SERVICE (getWeather):',error))
+        .catch(error => console.log(error))
 }
-
 
 export default {
     getForcast,

@@ -17,7 +17,7 @@ class Filter extends Component {
     }
     render() {
         return (
-            <form onSubmit={this.handleSubmit} className="container">
+            <form onSubmit={this.handleSubmit} className="container filter-container">
                 <input type="text" placeholder="Search for weather location" onChange={this.handleChange} />
             </form>
         )
