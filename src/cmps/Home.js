@@ -153,18 +153,19 @@ class Home extends Component {
         const toggleAddFavorite = (this.isCurrentFavorite()) ? 'Remove Favorite' : 'Add to Favorites';
         const colorIsFavorite = (this.isCurrentFavorite()) ? { color: 'red' } : { color: 'grey' };
         const toggleTheme = (this.props.theme==='light') ? 'D' : 'L';
-
+        const mainContainer = (this.props.theme === 'light') ? 'main-container' : 'main-container-dark';
+        const fontColor = (this.props.theme === 'light') ? {color:'black'} : {color:'white'};
         return (
-            <div className="main-container" >
+            <div className={mainContainer} >
                 <Filter />
                 <div className="flex-space-between">
                     <div className="flex curr-city">
-                        <img className="large-image" src={CURRENT_WEATHER_URL}
+                        <img className="large-image" src={CURRENT_WEATHER_URL} 
                             title={weatherDescription} alt={weatherDescription} />
                         <div className="flex-col">
-                            <div>{cityName}, {countryName}</div>
-                            <div className={isCelsius}>{temperatureImperialVal}{temperatureImperialUnit}</div>
-                            <div className={isFahrenheit}>{temperatureMetricVal}{temperatureMetricUnit}</div>
+                            <div style={fontColor}>{cityName}, {countryName}</div>
+                            <div className={isCelsius} style={fontColor}>{temperatureImperialVal}{temperatureImperialUnit}</div>
+                            <div className={isFahrenheit} style={fontColor}>{temperatureMetricVal}{temperatureMetricUnit}</div>
                         </div>
                     </div>
                     <div className="flex centered add-fav">
@@ -176,7 +177,7 @@ class Home extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="center main-description">{weatherDescription}</div>
+                <div style={fontColor} className="center main-description">{weatherDescription}</div>
                 <ul className="forcast-list">
                     {dayList}
                 </ul>

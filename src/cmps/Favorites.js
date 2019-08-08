@@ -36,18 +36,22 @@ class Favorites extends Component {
     })
   }
   render() {
+    const maxContainer = (this.props.theme === 'light') ? 'max-container' : 'max-container-dark';
+
     return (
-      <div className="container">
+      <div className={maxContainer}>
         <FavoriteList />
       </div>
     )
   }
 }
+
 const mapStateToProps = (state) => {
   return {
     citiesInfo: state.location.citiesInfo,
     favorites: state.location.favorites,
-    currentWeather: state.location.currentWeather
+    currentWeather: state.location.currentWeather,
+    theme:state.setting.currentTheme
   }
 }
 
