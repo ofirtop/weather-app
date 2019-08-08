@@ -7,6 +7,7 @@ export const getCityInfo = (cityName, isFavorite, isCurrent) => {
             .then(cityInfo => {
                 cityInfo.isFavorite = isFavorite;
                 cityInfo.isCurrent = isCurrent;
+                //emulate error handling by writing in the filter : 'Madrid'
                 if (cityName === 'Madrid') dispatch({ type: 'LOCATION_ERROR', error: cityName })
                 else dispatch({ type: 'SET_CITY_INFO', cityInfo })
             })

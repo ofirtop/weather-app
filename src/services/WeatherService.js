@@ -1,15 +1,17 @@
 import Axios from "axios";
 
-const getForcast = (cityId = '215854',dispatch) => {
+const getForcast = (cityId = '215854', dispatch) => {
     const WEATHER_API_KEY = 'gQ307OUWQ0rbqOqwiGr85Z3JDQBtEEII';
     const FORCAST_URL = 'https://dataservice.accuweather.com/forecasts/v1/daily/5day/';
     const query = `${FORCAST_URL}${cityId}?apikey=${WEATHER_API_KEY} `;
 
     return Axios.get(query)
-        .then(result => {
+        .then(result => {            
             return result.data
         })
-        .catch(error =>  console.log(error))
+        .catch(error => {            
+            throw error
+        })
 }
 const getWeather = (cityId = '215854') => {
     const WEATHER_API_KEY = 'gQ307OUWQ0rbqOqwiGr85Z3JDQBtEEII';
@@ -26,10 +28,12 @@ const getWeather = (cityId = '215854') => {
                 temperatureImperialUnit: result.data[0].Temperature.Imperial.Unit,
                 temperatureMetricVal: result.data[0].Temperature.Metric.Value,
                 temperatureMetricUnit: result.data[0].Temperature.Metric.Unit,
-            }
+            }            
             return weather
         })
-        .catch(error => console.log(error))
+        .catch(error => {            
+            throw error
+        })
 }
 
 export default {
