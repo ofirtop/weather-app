@@ -2,11 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getForcast, getWeather } from '../store/actions/weatherActions'
 import { getCityInfo, toggleFavoriteStatus, loadFavoritesFromStorage } from '../store/actions/locationActions'
-import { toggleScale } from '../store/actions/settingActions'
+import { toggleScale, toggleTheme } from '../store/actions/settingActions'
 import utilService from '../services/utilService'
 import 'react-toastify/dist/ReactToastify.css';
-// import Toggle from 'react-toggle'
-// import 'react-toggle/style.css'
 import { toast } from 'react-toastify';
 import Filter from './Filter'
 import SingleDaySummary from './SingleDaySummary'
@@ -95,8 +93,11 @@ class Home extends Component {
     isCurrentCelsius() {
         return this.props.scale === 'c'
     }
-    handleToggleScale = ()=>{
+    handleToggleScale = () => {
         this.props.toggleScale()
+    }
+    handleToggleTheme = () => {
+        this.props.toggleTheme()
     }
     notify(msg) {
         toast(msg)
@@ -111,7 +112,7 @@ class Home extends Component {
 
             temperatureImperialVal = currentWeather[0].temperatureImperialVal;
             temperatureImperialUnit = currentWeather[0].temperatureImperialUnit;
-            
+
             temperatureMetricVal = currentWeather[0].temperatureMetricVal;
             temperatureMetricUnit = currentWeather[0].temperatureMetricUnit;
 
@@ -148,9 +149,10 @@ class Home extends Component {
 
         const isCelsius = (this.isCurrentCelsius()) ? 'hide' : '';
         const isFahrenheit = (!this.isCurrentCelsius()) ? 'hide' : '';
-        const toggleScale = (this.isCurrentCelsius()) ? 'Set Fahrenheit' : 'Set Celsius';
+        const toggleScale = (this.isCurrentCelsius()) ? 'F' : 'C';
         const toggleAddFavorite = (this.isCurrentFavorite()) ? 'Remove Favorite' : 'Add to Favorites';
         const colorIsFavorite = (this.isCurrentFavorite()) ? { color: 'red' } : { color: 'grey' };
+        const toggleTheme = (this.props.theme==='light') ? 'D' : 'L';
 
         return (
             <div className="main-container" >
@@ -168,8 +170,10 @@ class Home extends Component {
                     <div className="flex centered add-fav">
                         <i className="small material-icons" style={colorIsFavorite}>favorite</i>
                         <button className="btn toggle-fav blue darken-2" onClick={this.handleToggleFavorite}>{toggleAddFavorite}</button>
-                        <button className="btn toggle-fav blue darken-2" onClick={this.handleToggleScale}>{toggleScale}</button>
-                        
+                        <div className="right setting-action">
+                            <button className="btn toggle-setting blue darken-2" title="Temperature System [Fahrenheit \ Celsius]" onClick={this.handleToggleScale}>{toggleScale}</button>
+                            <button className="btn toggle-setting blue darken-2" title="Change Theme [Dark \ Light]" onClick={this.handleToggleTheme}>{toggleTheme}</button>
+                        </div>
                     </div>
                 </div>
                 <div className="center main-description">{weatherDescription}</div>
@@ -193,7 +197,8 @@ const mapStateToProps = (state) => {
         currentWeather: state.weather.currentWeather,
         weatherError: state.weather.error,
         locationError: state.location.error,
-        scale : state.setting.currentScale
+        scale: state.setting.currentScale,
+        theme: state.setting.currentTheme
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -203,6 +208,7 @@ const mapDispatchToProps = (dispatch) => {
         getWeather: (cityId, isCurrent) => { dispatch(getWeather(cityId, isCurrent)) },
         toggleFavoriteStatus: (cityId) => { dispatch(toggleFavoriteStatus(cityId)) },
         toggleScale: () => { dispatch(toggleScale()) },
+        toggleTheme: () => { dispatch(toggleTheme()) },
         loadFavoritesFromStorage: () => { dispatch(loadFavoritesFromStorage()) }
     }
 }

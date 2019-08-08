@@ -14,7 +14,12 @@ code {
   flex-direction: column;
   align-items: center;
 }
-
+.main-container-dark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color:black;
+}
 .flex {
   display: flex;
 }
@@ -26,12 +31,19 @@ code {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  width: 100%;
+  width: 80%;
 }
-
+/* .setting-actions{
+  margin-right:20px;
+} */
 .toggle-fav {
   min-width: 140px;
   margin-left: 10px;
+}
+ 
+.toggle-setting {
+  width: 40px;
+  margin: 5px;
 }
 input{
   margin-left:50px;
@@ -78,7 +90,7 @@ ul.forcast-list {
   min-width: 140px;
 }
 .curr-city {
-  align-items: center
+  align-items: center;
 }
 button {
   margin: 10px 35px;
