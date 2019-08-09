@@ -5,6 +5,7 @@ import Home from './cmps/Home';
 import Favorites from './cmps/Favorites';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css'; 
+import 'materialize-css/dist/css/materialize.min.css';
 
 
 

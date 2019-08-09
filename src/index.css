@@ -21,7 +21,14 @@ code {
   align-items: center;
   background-color: black;
 }
-
+.max-container {
+  width: 100%;
+  height: 100vh;
+  padding:20px
+}
+.action-bar{
+  margin-top:-59px;
+}
 .flex {
   display: flex;
 }
@@ -37,11 +44,6 @@ code {
   flex-wrap: wrap;
   width: 80%;
 }
-
-/* .setting-actions{
-  margin-right:20px;
-} */
-
 .toggle-fav {
   min-width: 140px;
   margin-left: 10px;
@@ -67,11 +69,13 @@ ul.forcast-list {
 }
 
 .main-description {
-  font-size: 40px;
+  font-size: 50px;  
+  padding-top:10px;
 }
 
 .secondary-description {
   font-size: 30px;
+  margin-top:0;
 }
 
 .flex-col {
@@ -131,14 +135,9 @@ button {
     width: 100%;
     height: 100vh;
   }
-  .max-container-dark {
-    width: 100%;
-    height: 100vh;
-    background-color:black
-  }
-  .main-description {
+  /* .main-description {
     font-size: 20px;
-  }
+  } */
   .card-title, .flex-col {
     font-size: 16px;
     justify-content: flex-start;

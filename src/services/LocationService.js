@@ -7,18 +7,12 @@ const getCityInfoByName = (cityName) => {
 
   return Axios.get(query)
     .then(result => {
-      let cityInfo = {
-        cityId: result.data[0].Key,
-        cityName: result.data[0].LocalizedName
-      };
-
-      return cityInfo
+      return result.data;
     })
     .catch(error => {
       throw error
     })
 }
-
 
 export default {
   getCityInfoByName

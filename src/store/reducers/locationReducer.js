@@ -4,6 +4,7 @@ const initState = {
     favorites: [],//City names
     isFavoritesLoaded: false,
     citiesInfo: [],
+    optionalCities:[],
     defaultCityName: 'Tel Aviv',
     error: ''
 }
@@ -71,6 +72,14 @@ const locationReducer = (state = initState, action) => {
                     error: ''
                 }
             }
+            case 'SET_CITIES_OPTIONS':
+                {
+                    return {
+                        ...state,
+                        optionalCities:action.optionalCities
+
+                    }
+                }
         case 'LOCATION_ERROR':
             return {
                 ...state,

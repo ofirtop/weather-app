@@ -4,12 +4,24 @@ import { loadFromStorage } from '../../services/utilService'
 export const getCityInfo = (cityName, isFavorite, isCurrent) => {
     return (dispatch, getState) => {
         LocationService.getCityInfoByName(cityName)
-            .then(cityInfo => {
-                cityInfo.isFavorite = isFavorite;
-                cityInfo.isCurrent = isCurrent;
-                //emulate error handling by writing in the filter : 'Madrid'
-                if (cityName === 'Madrid') dispatch({ type: 'LOCATION_ERROR', error: cityName })
-                else dispatch({ type: 'SET_CITY_INFO', cityInfo })
+            .then(cities => {
+                //creating options of cities for the filter autocomplete 
+                let optionalCities = {};
+                cities.forEach(city => {
+                    optionalCities[city.LocalizedName + ',' + city.Country.LocalizedName] = null;
+                })
+                dispatch({ type: 'SET_CITIES_OPTIONS', optionalCities })
+
+                //create the city to be rendered
+                let city = cities[0];
+                let cityInfo = {
+                    cityId: city.Key,
+                    cityName: city.LocalizedName,
+                    countryName: city.Country.LocalizedName,
+                    isCurrent,
+                    isFavorite
+                };
+                dispatch({ type: 'SET_CITY_INFO', cityInfo })
             })
             .catch(error => {
                 dispatch({ type: 'LOCATION_ERROR', error })

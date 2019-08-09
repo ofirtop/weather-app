@@ -1,33 +1,60 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getCityInfo } from '../store/actions/locationActions'
+// Import Materialize
+import M from "materialize-css";
 
 class Filter extends Component {
-    state = {
-        cityName: ''
+    componentDidMount() {
+        let autocomplete = document.getElementById('autocomplete-input');
+        let instance = M.Autocomplete.init(autocomplete, {
+            data: this.props.optionalCities, onAutocomplete: (val) => {
+                let index = val.indexOf(',')
+                let result = val.substring(0, index)
+                this.props.getCityInfo(result, false, true);
+            }
+        });
     }
     handleChange = (e) => {
-        this.setState({
-            cityName:e.target.value
-        })
-    }
-    handleSubmit = (e) => {
-        e.preventDefault();
-        this.props.getCityInfo(this.state.cityName,false,true);
+        this.props.getCityInfo(e.target.value, false, true);
     }
     render() {
+        console.log('rendering...')
+        console.log(this.props.optionalCities)
+        let autocomplete = document.getElementById('autocomplete-input');
+        if (autocomplete) {
+            let instance = M.Autocomplete.getInstance(autocomplete)
+            if (this.props.optionalCities) instance.updateData(this.props.optionalCities);
+
+        }
         return (
             <form onSubmit={this.handleSubmit} className="container filter-container">
-                <input type="text" placeholder="Search for weather location" onChange={this.handleChange} />
+                <div className="row">
+                    <div className="col s12">
+                        <div className="row">
+                            <div className="input-field col s12">
+                                <i className="material-icons prefix">textsms</i>
+                                <input type="text" id="autocomplete-input" onChange={this.handleChange}
+                                    className="autocomplete" />
+                                <label htmlFor="autocomplete-input">Search for weather location</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
         )
     }
 }
 
-//allow component to dispach action to set the store
-const mapDispatchToProps = (dispatch) => {
+
+const mapStateToProps = (state) => {
     return {
-        getCityInfo: (cityName,isFavorite,isCurrent) => dispatch(getCityInfo(cityName,isFavorite,isCurrent))
+        optionalCities: state.location.optionalCities
     }
 }
-export default connect(null, mapDispatchToProps)(Filter)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getCityInfo: (cityName, isFavorite, isCurrent) => dispatch(getCityInfo(cityName, isFavorite, isCurrent))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Filter)

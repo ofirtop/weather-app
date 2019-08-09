@@ -158,7 +158,7 @@ class Home extends Component {
         return (
             <div className={mainContainer} >
                 <Filter />
-                <div className="flex-space-between">
+                <div className="flex-space-between action-bar">
                     <div className="flex curr-city">
                         <img className="large-image" src={CURRENT_WEATHER_URL} 
                             title={weatherDescription} alt={weatherDescription} />
@@ -199,7 +199,7 @@ const mapStateToProps = (state) => {
         weatherError: state.weather.error,
         locationError: state.location.error,
         scale: state.setting.currentScale,
-        theme: state.setting.currentTheme
+        theme: state.setting.currentTheme        
     }
 }
 const mapDispatchToProps = (dispatch) => {
