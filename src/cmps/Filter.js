@@ -19,14 +19,14 @@ class Filter extends Component {
         this.props.getCityInfo(e.target.value, false, true);
     }
     render() {
-        console.log('rendering...')
-        console.log(this.props.optionalCities)
+
         let autocomplete = document.getElementById('autocomplete-input');
         if (autocomplete) {
             let instance = M.Autocomplete.getInstance(autocomplete)
             if (this.props.optionalCities) instance.updateData(this.props.optionalCities);
 
-        }
+        }        
+        const fontColor = (this.props.theme === 'light') ? { color: 'black' } : { color: 'white' };
         return (
             <form onSubmit={this.handleSubmit} className="container filter-container">
                 <div className="row">
@@ -35,7 +35,7 @@ class Filter extends Component {
                             <div className="input-field col s12">
                                 <i className="material-icons prefix">textsms</i>
                                 <input type="text" id="autocomplete-input" onChange={this.handleChange}
-                                    className="autocomplete" />
+                                    className="autocomplete" style={fontColor} />
                                 <label htmlFor="autocomplete-input">Search for weather location</label>
                             </div>
                         </div>
@@ -49,7 +49,8 @@ class Filter extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        optionalCities: state.location.optionalCities
+        optionalCities: state.location.optionalCities,
+        theme: state.setting.currentTheme
     }
 }
 const mapDispatchToProps = (dispatch) => {

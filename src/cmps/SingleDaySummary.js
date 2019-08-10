@@ -31,7 +31,7 @@ const SingleDaySummary = (props) => {
         return (fahrenheit - 32) * (5 / 9)
     }
     return (
-        <div className="card week-day" >
+        <div className="card forcast-item" >
             <div className="card-content">
                 <div className="card-title">{weekdays[new Date(day.Date).getDay()]}</div>
                 <img src={DAY_URL} title={props.day.Day.IconPhrase} alt={props.day.Day.IconPhrase} />

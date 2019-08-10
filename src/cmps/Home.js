@@ -152,15 +152,15 @@ class Home extends Component {
         const toggleScale = (this.isCurrentCelsius()) ? 'F' : 'C';
         const toggleAddFavorite = (this.isCurrentFavorite()) ? 'Remove Favorite' : 'Add to Favorites';
         const colorIsFavorite = (this.isCurrentFavorite()) ? { color: 'red' } : { color: 'grey' };
-        const toggleTheme = (this.props.theme==='light') ? 'D' : 'L';
+        const toggleTheme = (this.props.theme === 'light') ? 'D' : 'L';
         const mainContainer = (this.props.theme === 'light') ? 'main-container' : 'main-container-dark';
-        const fontColor = (this.props.theme === 'light') ? {color:'black'} : {color:'white'};
+        const fontColor = (this.props.theme === 'light') ? { color: 'black' } : { color: 'white' };
         return (
             <div className={mainContainer} >
                 <Filter />
                 <div className="flex-space-between action-bar">
                     <div className="flex curr-city">
-                        <img className="large-image" src={CURRENT_WEATHER_URL} 
+                        <img className="large-image" src={CURRENT_WEATHER_URL}
                             title={weatherDescription} alt={weatherDescription} />
                         <div className="flex-col">
                             <div style={fontColor}>{cityName}, {countryName}</div>
@@ -178,8 +178,10 @@ class Home extends Component {
                     </div>
                 </div>
                 <div style={fontColor} className="center main-description">{weatherDescription}</div>
-                <ul className="forcast-list">
-                    {dayList}
+                <ul className="forcast-container">
+                    <div className="forcast-list">
+                        {dayList}
+                    </div>
                 </ul>
                 <p className="center blue-text darken-2 secondary-description">{forcastDescription}</p>
 
@@ -199,7 +201,7 @@ const mapStateToProps = (state) => {
         weatherError: state.weather.error,
         locationError: state.location.error,
         scale: state.setting.currentScale,
-        theme: state.setting.currentTheme        
+        theme: state.setting.currentTheme
     }
 }
 const mapDispatchToProps = (dispatch) => {

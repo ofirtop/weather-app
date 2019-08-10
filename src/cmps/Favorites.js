@@ -39,7 +39,7 @@ class Favorites extends Component {
     const themeColor = (this.props.theme === 'light') ? {background:'white'} : {background:'black'};
 
     return (
-      <div className="max-container" style={themeColor}>
+      <div className="max-container"  style={themeColor}>
         <FavoriteList />
       </div>
     )

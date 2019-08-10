@@ -3,7 +3,10 @@ import { connect } from 'react-redux'
 import SingleFavoriteItem from './SingleFavoriteItem'
 
 class FavoriteList extends Component {
+
     render() {
+        const themeColor = (this.props.theme === 'light') ? { background: 'white' } : { background: 'black' };
+
         const favoritesInfo = [];
         //composing an object that have cityInfo and weater (only if favorite)
         if (this.props.citiesInfo.length) {
@@ -14,7 +17,7 @@ class FavoriteList extends Component {
                             favoritesInfo.push({ cityInfo, currentWeather })
                         }
                     })
-                 }
+                }
             })
         }
 
@@ -25,10 +28,12 @@ class FavoriteList extends Component {
                 )
             })
         ) : (<div className="" >No Favorites Selected </div>)
-        
+
         return (
-            <ul className="forcast-list center">          
+            <ul className="weather-container">
+                <div className="weather-list">
                     {favoritesInfoToRender}
+                </div>
             </ul>
         )
     }
@@ -38,7 +43,7 @@ const mapStateToProps = (state) => {
     return {
         citiesInfo: state.location.citiesInfo,
         currentWeather: state.weather.currentWeather,
-        scale:state.setting.currentScale
+        scale: state.setting.currentScale
     }
 }
 

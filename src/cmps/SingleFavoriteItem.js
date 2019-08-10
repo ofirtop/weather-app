@@ -27,7 +27,7 @@ const SingleFavoriteItem = (props) => {
     const isFahrenheit = (props.scale !== 'c') ? 'hide' : '';
 
     return (
-        <Link to={'/' + cityId}>
+        <Link to={'/' + cityId} className="weather-item">
             <div className="card" >
                 <div className="card-content">
                     <div>{cityName}, {countryName}</div>

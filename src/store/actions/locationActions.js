@@ -3,16 +3,18 @@ import { loadFromStorage } from '../../services/utilService'
 
 export const getCityInfo = (cityName, isFavorite, isCurrent) => {
     return (dispatch, getState) => {
+        if(cityName === '') return;
         LocationService.getCityInfoByName(cityName)
             .then(cities => {
+                if (!cities) return                
                 //creating options of cities for the filter autocomplete 
                 let optionalCities = {};
                 cities.forEach(city => {
                     optionalCities[city.LocalizedName + ',' + city.Country.LocalizedName] = null;
-                })
+                })                
                 dispatch({ type: 'SET_CITIES_OPTIONS', optionalCities })
-
                 //create the city to be rendered
+                if (!cities || cities.length === 0) return;                
                 let city = cities[0];
                 let cityInfo = {
                     cityId: city.Key,
@@ -20,7 +22,7 @@ export const getCityInfo = (cityName, isFavorite, isCurrent) => {
                     countryName: city.Country.LocalizedName,
                     isCurrent,
                     isFavorite
-                };
+                };                
                 dispatch({ type: 'SET_CITY_INFO', cityInfo })
             })
             .catch(error => {
