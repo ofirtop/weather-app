@@ -75,7 +75,7 @@ ul .weather-list {
   justify-items: center;
   /*Align items vertically in cells */
   align-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   grid-gap: 15px;
   position: relative;
   margin: 0;
@@ -83,7 +83,8 @@ ul .weather-list {
 }
 
 .weather-item {
-  min-width: 180px;   
+  min-width: 160px;
+  min-width: 120px;  
 }
 
 ul .forcast-list {
@@ -101,7 +102,7 @@ ul .forcast-list {
 
 .forcast-item {
   min-width: 160px;
-  min-width: 140px;
+  min-width: 120px;
 }
 .main-description {
   font-size: 50px;
@@ -190,4 +191,8 @@ button {
     margin-right: 15px;
     /* min-width: unset; */
   }
+}
+
+.border-yellow{
+  border:1px solid yellow;
 }

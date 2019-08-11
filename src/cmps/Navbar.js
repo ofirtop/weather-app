@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom'
 const Navbar = (props) => {
     return (
         <nav className="blue darken-2">
-            <div className="border-black">
+            <div>
                 <Link to="/" className="left brand">iWeather</Link>
                 <ul className="right nav-links">
                     <li><NavLink to="/">Home</NavLink></li>
