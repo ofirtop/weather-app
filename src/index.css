@@ -75,15 +75,15 @@ ul .weather-list {
   justify-items: center;
   /*Align items vertically in cells */
   align-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  grid-gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-gap: 15px;
   position: relative;
   margin: 0;
   padding-top: 10px;
 }
 
 .weather-item {
-  min-width: 210px;   
+  min-width: 180px;   
 }
 
 ul .forcast-list {

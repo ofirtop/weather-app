@@ -30,7 +30,8 @@ const SingleFavoriteItem = (props) => {
         <Link to={'/' + cityId} className="weather-item">
             <div className="card" >
                 <div className="card-content">
-                    <div>{cityName}, {countryName}</div>
+                    <div>{cityName}</div>
+                    <div>{countryName}</div>
                     <div className={isCelsius}>{temperatureImperialVal}{temperatureImperialUnit}</div>
                     <div className={isFahrenheit}>{temperatureMetricVal}{temperatureMetricUnit}</div>
                     <img src={CURRENT_WEATHER_URL} title={weatherDescription} alt={weatherDescription} />
